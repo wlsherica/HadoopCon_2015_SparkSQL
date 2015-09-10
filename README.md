@@ -4,7 +4,7 @@ Tutorial of Spark SQL on HadoopCon 2015. This is a file of [IPython notebook](ht
 
 ## Requirements
 
-This library requires Spark 1.4.1
+This training material requires Spark 1.4.1
 
 ### Python API
 Spark 1.4.1:
