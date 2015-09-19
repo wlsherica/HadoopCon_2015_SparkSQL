@@ -10,6 +10,10 @@ This training material requires Spark 1.4.1
 
 In this tutorial, you will learn how to initialize Spark SQL with SQLContext (HiveContext), manipulate DataFrames, import data, user defined functions, and operate cache(). For example, 
 
+## Slides
+
+This is a link of [Spark SQL](https://speakerdeck.com/wlsherica/spark-sql-of-hadoop-con-2015)
+
 ### Python API
 Spark 1.4.1:
 ```python
