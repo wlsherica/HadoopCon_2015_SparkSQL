@@ -11,7 +11,47 @@
 #   src_bytes: number of data bytes from source to destination 
 #   dst_bytes: number of data bytes from destination to source 
 
-#start 
+#connected with local
+
+filepath = "$SPARK_HOME/examples/src/main/resources/people.json"
+sqlContext.read.json(filepath)
+
+#connected with local txt file
+from pyspark.sql import Row
+lines = sc.textFile("file://$SPARK_HOME/examples/src/main/resources/people.txt")
+parts = lines.map(lambda l: l.split(","))
+people = parts.map(lambda p: Row(name=p[0], age=int(p[1])))
+peopledf = sqlContext.createDataFrame(people)
+peopledf.registerTempTable("people")
+
+#connected with hdfs
+filepath = "/user/erica/people.json"
+sqlContext.read.json(filepath)
+df.write.json(filepath)
+
+#connected with hive
+#check hive-site.xml location
+sqlContext.sql("show tables").show()
+
+#output
+
+#save parquet file
+df.save(hdfspath)
+#/user/hive/warehouse/ec.db parquet file
+df.saveAsTable("your_table")
+#save as json
+df.save(path="<path>/data.json",source="json",mode="append")  
+df.save(path="file://<path>/data.json",source="json",mode="append") 
+
+#dataframe operations
+peopledf.show()
+peopledf.printSchema()
+peopledf.select("name").show()
+peopledf.filter(peopledf.age > 20).show()
+peopledf.groupBy("name").count().show()
+
+
+#case study
 #data preparation
 import urllib
 f = urllib.urlretrieve ("http://kdd.ics.uci.edu/databases/kddcup99/kddcup.data_10_percent.gz", "/home/erica/kddcup.data_10_percent.gz")
