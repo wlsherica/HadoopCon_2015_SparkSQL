@@ -86,6 +86,9 @@ row_data = csv_data.map(lambda p: Row(
 #list what we have
 sqlContext.sql("show tables").show()
 
+#table to df
+sqlContext.table("people")
+
 #transform pythonRDD to dataframe
 interactions_df = sqlContext.createDataFrame(row_data)
 #register temp table
